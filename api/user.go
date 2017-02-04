@@ -1620,8 +1620,8 @@ func UpdateUserRoles(user *model.User, newRoles string) (*model.User, *model.App
 func updateActive(c *Context, w http.ResponseWriter, r *http.Request) {
 	buf := new(bytes.Buffer)
 //	buf.ReadFrom(r.Body)
-//	l4g.Debug(buf.String())
-	props := model.MapFromJson(r.Body)
+	l4g.Debug(buf.String())
+//	props := model.MapFromJson(r.Body)
 	json.Unmarshal([]byte(buf.String()), &props)
 
 	user_id := props["user_id"]
