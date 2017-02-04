@@ -4,6 +4,7 @@
 package api
 
 import (
+	"encoding/json"
 	"bytes"
 	b64 "encoding/base64"
 	"fmt"
@@ -550,7 +551,7 @@ func getUserForLogin(loginId string, onlyLdap bool) (*model.User, *model.AppErro
 }
 
 func LoginByOAuth(c *Context, w http.ResponseWriter, r *http.Request, service string, userData io.Reader) *model.User {
-	buf := bytes.Buffer{}
+	buf := new(bytes.Buffer)
 	buf.ReadFrom(userData)
 
 	authData := ""
@@ -1617,9 +1618,15 @@ func UpdateUserRoles(user *model.User, newRoles string) (*model.User, *model.App
 }
 
 func updateActive(c *Context, w http.ResponseWriter, r *http.Request) {
+	buf := new(bytes.Buffer)
+//	buf.ReadFrom(r.Body)
+//	l4g.Debug(buf.String())
 	props := model.MapFromJson(r.Body)
+	json.Unmarshal([]byte(buf.String()), &props)
 
 	user_id := props["user_id"]
+	l4g.Debug("user_id: " + user_id)
+	l4g.Debug(props)
 	if len(user_id) != 26 {
 		c.SetInvalidParam("updateActive", "user_id")
 		return
