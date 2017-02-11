@@ -93,7 +93,7 @@ export default class TeamSidebar extends React.Component {
             return null;
         }
 
-        const myTeams = [];
+        var myTeams = [];			//	by Jerry 0024
         const isSystemAdmin = Utils.isSystemAdmin(UserStore.getCurrentUser().roles);
         const isAlreadyMember = new Map();
         let moreTeams = false;
@@ -110,6 +110,25 @@ export default class TeamSidebar extends React.Component {
             }
         }
 
+		//	by Jerry 0024
+		//	코람코 Team을 가장 위에 표시
+		const newMyTeam = [];
+		const sortedMyTeam = myTeams.sort((a, b) => a.display_name.localeCompare(b.display_name));
+		for(var idx in sortedMyTeam) {
+			var team = sortedMyTeam[idx];
+			if(team.name == 'koramco') {
+				newMyTeam.push(team)
+			}
+		}
+		for(var idx in sortedMyTeam) {
+			var team = sortedMyTeam[idx];
+			if(team.name != 'koramco') {
+				newMyTeam.push(team)
+			}
+		}
+		myTeams = newMyTeam;
+		//	by Jerry 0024
+		
         for (const id in this.state.teamListings) {
             if (this.state.teamListings.hasOwnProperty(id) && !isAlreadyMember[id]) {
                 moreTeams = true;
@@ -118,7 +137,8 @@ export default class TeamSidebar extends React.Component {
         }
 
         const teams = myTeams.
-        sort((a, b) => a.display_name.localeCompare(b.display_name)).
+		//	by Jerry 0024
+//        sort((a, b) => a.display_name.localeCompare(b.display_name)).
         map((team) => {
             return (
                 <TeamButton
@@ -130,6 +150,7 @@ export default class TeamSidebar extends React.Component {
                     displayName={team.display_name}
                     unread={team.unread}
                     mentions={team.mentions}
+					koramco={team.name == 'koramco'  /* by Jerry 0024 */}
                 />
             );
         });
@@ -148,6 +169,7 @@ export default class TeamSidebar extends React.Component {
                         />
                     }
                     content={<i className='fa fa-plus'/>}
+					koramco={team.name == 'koramco'  /* by Jerry 0024 */}
                 />
             );
         } else if (global.window.mm_config.EnableTeamCreation === 'true' || isSystemAdmin) {

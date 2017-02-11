@@ -7,6 +7,9 @@ import (
 	"database/sql"
 	"strconv"
 
+	// by Jerry 0005
+//	l4g "github.com/alecthomas/log4go"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 )
@@ -98,10 +101,22 @@ func (s SqlTeamStore) Update(team *model.Team) StoreChannel {
 
 	storeChannel := make(StoreChannel, 1)
 
+	// by Jerry 0005
+//	l4g.Debug("*** Jerry Debug Update ***")
+//	l4g.Debug(team)
+
 	go func() {
 		result := StoreResult{}
 
+		// by Jerry 0005
+//		l4g.Debug("*** Jerry Debug Before PreUpdate ***")
+//		l4g.Debug(team)
+
 		team.PreUpdate()
+
+		// by Jerry 0005
+//		l4g.Debug("*** Jerry Debug After PreUpdate ***")
+//		l4g.Debug(team)
 
 		if result.Err = team.IsValid(); result.Err != nil {
 			storeChannel <- result
@@ -117,7 +132,13 @@ func (s SqlTeamStore) Update(team *model.Team) StoreChannel {
 			oldTeam := oldResult.(*model.Team)
 			team.CreateAt = oldTeam.CreateAt
 			team.UpdateAt = model.GetMillis()
-			team.Name = oldTeam.Name
+
+			// by Jerry
+			// team.Name = oldTeam.Name
+
+			// by Jerry 0005
+//			l4g.Debug("*** Jerry Debug ***")
+//			l4g.Debug(team)
 
 			if count, err := s.GetMaster().Update(team); err != nil {
 				result.Err = model.NewLocAppError("SqlTeamStore.Update", "store.sql_team.update.updating.app_error", nil, "id="+team.Id+", "+err.Error())

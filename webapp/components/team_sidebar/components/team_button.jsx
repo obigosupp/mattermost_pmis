@@ -35,14 +35,17 @@ export default class TeamButton extends React.Component {
             }
         }
 
+		//	by Jerry 0024
+		if(this.props.koramco) teamClass = teamClass + ' koramco';
+		
         let btn;
         let content = this.props.content;
         if (!content) {
             content = (
                 <div className='team-btn__initials'>
-                    {this.props.displayName.substring(0, 2)}
+                    {this.props.displayName.substring(0, 6)		/* by Jerry 0023 */}
                     <div className='team-btn__content'>
-                        {this.props.displayName}
+                        {this.props.displayName.substring(6)	/* by Jerry 0023 */}
                     </div>
                 </div>
             );
@@ -100,6 +103,7 @@ TeamButton.defaultProps = {
 };
 
 TeamButton.propTypes = {
+	koramco: React.PropTypes.bool,		/* by Jerry 0024 */
     btnClass: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
     displayName: React.PropTypes.string,

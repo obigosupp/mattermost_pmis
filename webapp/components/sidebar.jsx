@@ -808,10 +808,11 @@ export default class Sidebar extends React.Component {
                                     id='sidebar.channels'
                                     defaultMessage='Channels'
                                 />
-                                {createPublicChannelIcon}
+                                {isAdmin ? createPublicChannelIcon : ""		/* by Jerry 0012 */}
                             </h4>
                         </li>
                         {publicChannelItems}
+						{	isAdmin ? (			/* by Jerry 0012 */
                         <li>
                             <a
                                 href='#'
@@ -824,6 +825,8 @@ export default class Sidebar extends React.Component {
                                 />
                             </a>
                         </li>
+							) : ""
+						}
                     </ul>
 
                     <ul className='nav nav-pills nav-stacked'>

@@ -387,6 +387,10 @@ func addUserToTeam(c *Context, w http.ResponseWriter, r *http.Request) {
 	params := model.MapFromJson(r.Body)
 	userId := params["user_id"]
 
+	// by Jerry 0009
+	l4g.Debug("*** Jerry Debug addUserToTeam")
+	l4g.Debug(userId)
+
 	if len(userId) != 26 {
 		c.SetInvalidParam("addUserToTeam", "user_id")
 		return
@@ -703,6 +707,9 @@ func updateTeam(c *Context, w http.ResponseWriter, r *http.Request) {
 		oldTeam = result.Data.(*model.Team)
 	}
 
+	// by Jerry 0005
+	oldTeam.Name = team.Name
+
 	oldTeam.DisplayName = team.DisplayName
 	oldTeam.Description = team.Description
 	oldTeam.InviteId = team.InviteId
@@ -710,6 +717,10 @@ func updateTeam(c *Context, w http.ResponseWriter, r *http.Request) {
 	oldTeam.CompanyName = team.CompanyName
 	oldTeam.AllowedDomains = team.AllowedDomains
 	//oldTeam.Type = team.Type
+
+	// by Jerry 0005
+	l4g.Debug("*** Jerry Debug oldTeam ***")
+	l4g.Debug(oldTeam)
 
 	if result := <-Srv.Store.Team().Update(oldTeam); result.Err != nil {
 		c.Err = result.Err

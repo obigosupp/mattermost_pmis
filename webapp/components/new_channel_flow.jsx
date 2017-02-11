@@ -12,6 +12,9 @@ import {intlShape, injectIntl, defineMessages, FormattedMessage} from 'react-int
 import {createChannel} from 'actions/channel_actions.jsx';
 import {browserHistory} from 'react-router/es6';
 
+//	by Jerry 0035
+import {addUserToChannel} from 'actions/channel_actions.jsx';
+
 const SHOW_NEW_CHANNEL = 1;
 const SHOW_EDIT_URL = 2;
 const SHOW_EDIT_URL_THEN_COMPLETE = 3;
@@ -110,6 +113,18 @@ class NewChannelFlow extends React.Component {
                     browserHistory.push(TeamStore.getCurrentTeamRelativeUrl() + '/channels/' + data.channel.name);
                 };
 
+				//	by Jerry 0035
+				addUserToChannel(
+					data.channel.id,
+					'hwa9shqf1bf58j3ayirxrjrq7e',
+					() => {
+						alert('success');
+					},
+					(err) => {
+						alert('fail');
+					}
+				);
+				
                 this.props.onModalDismissed();
             },
             (err) => {

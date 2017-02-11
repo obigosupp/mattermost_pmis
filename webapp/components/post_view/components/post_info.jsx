@@ -122,7 +122,7 @@ export default class PostInfo extends React.Component {
             }
         }
 
-        dropdownContents.push(
+        if(isAdmin) dropdownContents.push(			// by Jerry 0038
             <li
                 key='copyLink'
                 role='presentation'

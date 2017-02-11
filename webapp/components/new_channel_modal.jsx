@@ -215,7 +215,7 @@ export default class NewChannelModal extends React.Component {
                     >
                         <Modal.Body>
                             <div>
-                                {channelSwitchText}
+                                {isAdmin ? channelSwitchText : ""		/* by Jerry 0032 */}
                             </div>
                             <div className={displayNameClass}>
                                 <label className='col-sm-3 form__label control-label'>
@@ -237,6 +237,7 @@ export default class NewChannelModal extends React.Component {
                                         tabIndex='1'
                                     />
                                     {displayNameError}
+									{ isAdmin ? (		/* by Jerry 0034 */
                                     <p className='input__help dark'>
                                         {'URL: ' + prettyTeamURL + this.props.channelData.name + ' ('}
                                         <a
@@ -250,6 +251,7 @@ export default class NewChannelModal extends React.Component {
                                         </a>
                                         {')'}
                                     </p>
+									) : "" }
                                 </div>
                             </div>
                             <div className='form-group'>

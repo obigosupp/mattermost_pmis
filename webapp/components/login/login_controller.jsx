@@ -382,16 +382,16 @@ export default class LoginController extends React.Component {
                                 spellCheck='false'
                             />
                         </div>
+						{ /* by Jerry 0027 */ }
                         <div className='form-group'>
-                            <button
-                                type='submit'
-                                className='btn btn-primary'
-                            >
-                                <FormattedMessage
-                                    id='login.signIn'
-                                    defaultMessage='Sign in'
-                                />
-                            </button>
+							<span className='pull-right footer-site-name'>
+								<button
+									type='submit'
+									className='from-group btn koramco'
+								>
+									<img src="/static/images/login_btn.png"/>
+								</button>
+							</span>
                         </div>
                     </div>
                 </form>
@@ -429,6 +429,8 @@ export default class LoginController extends React.Component {
                     key='forgotPassword'
                     className='form-group'
                 >
+					{ /* by Jerry 0027 */ }
+					<img src="/static/images/login_icon.jpg" />&nbsp;
                     <Link to={'/reset_password'}>
                         <FormattedMessage
                             id='login.forgot'
@@ -597,13 +599,19 @@ export default class LoginController extends React.Component {
                             className='signup-team-logo'
                             src={logoImage}
                         />
+						{ /* by Jerry 0027 */ }
                         <div className='signup__content'>
-                            <h1>{global.window.mm_config.SiteName}</h1>
-                            <h4 className='color--light'>
-                                {description}
-                            </h4>
+							<img src="/static/images/login_img.jpg" />
+							<p/>
+							<p/>
                             {content}
                         </div>
+						<div className='koramco_blank'/>
+                        <div className='koramco_logo'>
+							<span className='pull-right'>
+								<img src="/static/images/logo_koramco.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;
+							</span>
+						</div>
                     </div>
                 </div>
             </div>

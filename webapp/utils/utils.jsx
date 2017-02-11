@@ -27,12 +27,22 @@ export function isEmail(email) {
     return (/^.+@.+$/).test(email);
 }
 
+//	by Jerry 0034
+function guid() {
+    function s4() {
+      return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+  
 export function cleanUpUrlable(input) {
-    var cleaned = input.trim().replace(/-/g, ' ').replace(/[^\w\s]/gi, '').toLowerCase().replace(/\s/g, '-');
-    cleaned = cleaned.replace(/-{2,}/, '-');
-    cleaned = cleaned.replace(/^-+/, '');
-    cleaned = cleaned.replace(/-+$/, '');
-    return cleaned;
+	//	by Jerry 0034
+    // var cleaned = input.trim().replace(/-/g, ' ').replace(/[^\w\s]/gi, '').toLowerCase().replace(/\s/g, '-');
+    // cleaned = cleaned.replace(/-{2,}/, '-');
+    // cleaned = cleaned.replace(/^-+/, '');
+    // cleaned = cleaned.replace(/-+$/, '');
+    // return cleaned;
+	return guid();
 }
 
 export function isMac() {

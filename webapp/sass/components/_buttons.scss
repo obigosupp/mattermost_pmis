@@ -52,4 +52,11 @@
         border-color: transparent;
         color: $white;
     }
+	
+	/* by Jerry 0027 */
+	&.koramco {
+		background: transparent;
+		border: none !important;
+		font-size: 0;
+	}
 }

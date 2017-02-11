@@ -378,7 +378,7 @@ export default class ChannelHeader extends React.Component {
                 </li>
             );
         } else {
-            dropdownContents.push(
+            if(isAdmin) dropdownContents.push(		/* by Jerry 0017 */
                 <li
                     key='view_info'
                     role='presentation'
@@ -418,7 +418,7 @@ export default class ChannelHeader extends React.Component {
                 </li>
             );
 
-            dropdownContents.push(
+            if(isAdmin) dropdownContents.push(		/* by Jerry 0017 */
                 <li
                     key='divider-1'
                     className='divider'
@@ -426,7 +426,7 @@ export default class ChannelHeader extends React.Component {
             );
 
             if (!ChannelStore.isDefault(channel)) {
-                dropdownContents.push(
+				if(isAdmin || channel.name.indexOf("comm") != 0) dropdownContents.push(		/* by Jerry 0017 0033 */
                     <li
                         key='add_members'
                         role='presentation'
@@ -445,7 +445,7 @@ export default class ChannelHeader extends React.Component {
                     </li>
                 );
 
-                dropdownContents.push(
+				if(isAdmin || channel.name.indexOf("comm") != 0) dropdownContents.push(		/* by Jerry 0017 0033 */
                     <li
                         key='manage_members'
                         role='presentation'
@@ -492,6 +492,7 @@ export default class ChannelHeader extends React.Component {
                 </li>
             );
 
+			if(isAdmin || channel.name.indexOf("comm") != 0)		/* by Jerry 0017 0033 */
             if (ChannelUtils.showManagementOptions(channel, isAdmin, isSystemAdmin)) {
                 dropdownContents.push(
                     <li
@@ -557,6 +558,7 @@ export default class ChannelHeader extends React.Component {
                 );
             }
 
+			if(isAdmin || channel.name.indexOf("comm") != 0)		/* by Jerry 0017 0033 */
             if (ChannelUtils.showDeleteOption(channel, isAdmin, isSystemAdmin)) {
                 if (!ChannelStore.isDefault(channel)) {
                     dropdownContents.push(deleteOption);
@@ -565,6 +567,7 @@ export default class ChannelHeader extends React.Component {
                 dropdownContents.push(deleteOption);
             }
 
+			if(isAdmin)		/* by Jerry 0017 */
             dropdownContents.push(
                 <li
                     key='divider-3'
@@ -574,6 +577,7 @@ export default class ChannelHeader extends React.Component {
 
             const canLeave = channel.type === Constants.PRIVATE_CHANNEL ? this.state.userCount > 1 : true;
             if (!ChannelStore.isDefault(channel) && canLeave) {
+				if(isAdmin)		/* by Jerry 0017 */
                 dropdownContents.push(
                     <li
                         key='leave_channel'

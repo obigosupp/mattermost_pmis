@@ -487,6 +487,8 @@ export default class Navbar extends React.Component {
                 </li>
             );
 
+			var visible = (isAdmin || channel.name.indexOf("comm") != 0);		/* by Jerry 0021 0033 */
+			
             return (
                 <div className='navbar-brand'>
                     <div className='dropdown'>
@@ -514,15 +516,15 @@ export default class Navbar extends React.Component {
                             className='dropdown-menu'
                             role='menu'
                         >
-                            {viewInfoOption}
+                            {isAdmin ? viewInfoOption : ''				/* by Jerry 0021 0033 */}
                             {notificationPreferenceOption}
-                            {addMembersOption}
-                            {manageMembersOption}
-                            {setChannelHeaderOption}
-                            {setChannelPurposeOption}
-                            {renameChannelOption}
-                            {deleteChannelOption}
-                            {leaveChannelOption}
+                            {visible ? addMembersOption : ''			/* by Jerry 0021 0033 */}
+                            {visible ? manageMembersOption : ''			/* by Jerry 0021 0033 */}
+                            {visible ? setChannelHeaderOption : ''		/* by Jerry 0021 0033 */}
+                            {visible ? setChannelPurposeOption : ''		/* by Jerry 0021 0033 */}
+                            {visible ? renameChannelOption : ''			/* by Jerry 0021 0033 */}
+                            {visible ? deleteChannelOption : ''			/* by Jerry 0021 0033 */}
+                            {visible ? leaveChannelOption : ''			/* by Jerry 0021 0033 */}
                             {toggleFavoriteOption}
                             <div
                                 className='close visible-xs-block'

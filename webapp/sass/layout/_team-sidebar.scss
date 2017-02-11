@@ -4,7 +4,7 @@
         left: 0;
         position: fixed;
         text-align: center;
-        width: 65px;
+        width: 90px;		/* by Jerry 0023 */
         z-index: 5;
 
         .team-wrapper {
@@ -29,13 +29,13 @@
                     background-color: alpha-color($black, .3);
                     border: 1px solid alpha-color($white, .2);
                     display: table-cell;
-                    font-size: 12px;
+                    font-size: 12px;		/* by Jerry 0023 */
                     font-weight: bold;
                     padding: 4px 5px;
                     position: relative;
                     text-align: center;
                     vertical-align: top;
-                    width: 40px;
+                    width: 80px;			/* by Jerry 0023 */
 
                     .team-btn__initials {
                         text-align: left;
@@ -48,7 +48,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                        width: 31px;
+                        width: 70px;		/* by Jerry 0023 */
                     }
 
                     .badge {
@@ -64,6 +64,13 @@
                     }
                 }
 
+                /*	by Jerry 0024 */
+				&.koramco {
+                    .team-btn {
+                        background-color: $red;
+                    }
+                }
+				
                 &.active {
                     .team-btn {
                         background-color: transparent;
@@ -105,14 +112,14 @@
     }
 
     .sidebar--left {
-        left: 65px;
 
+        left: 90px;		/* by Jerry 0023 */
         .nav-pills__unread-indicator {
             left: 80px;
         }
     }
 
     .app__content {
-        margin-left: 285px;
+        margin-left: 305px;		/* by Jerry 0023 */
     }
 }

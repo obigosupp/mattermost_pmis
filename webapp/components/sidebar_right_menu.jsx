@@ -414,16 +414,16 @@ export default class SidebarRightMenu extends React.Component {
                                 />
                             </a>
                         </li>
-                        {inviteLink}
-                        {teamLink}
+                        {isAdmin ? inviteLink : ''	/* by Jerry 0022 */}
+                        {isAdmin ? teamLink : ''		/* by Jerry 0022 */}
                         {joinAnotherTeamLink}
                         <li className='divider'/>
                         {teamSettingsLink}
                         {manageLink}
                         {consoleLink}
                         <li className='divider'/>
-                        {helpLink}
-                        {reportLink}
+                        {isAdmin ? helpLink : ''		/* by Jerry 0022 */}
+                        {isAdmin ? reportLink : ''	/* by Jerry 0022 */}
                         <li>
                             <a
                                 href='#'

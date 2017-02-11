@@ -473,8 +473,8 @@ export default class SidebarHeaderDropdown extends React.Component {
                             />
                         </a>
                     </li>
-                    {inviteLink}
-                    {teamLink}
+                    {isAdmin ? inviteLink : '' /* by Jerry 0016 */}
+                    {isAdmin ? teamLink : '' /* by Jerry 0016 */}
                     <li>
                         <a
                             href='#'
@@ -493,10 +493,10 @@ export default class SidebarHeaderDropdown extends React.Component {
                     {teamSettings}
                     {manageLink}
                     {sysAdminLink}
-                    {teams}
+                    {isAdmin ? teams : '' /* by Jerry 0016 */}
                     <li className='divider'/>
-                    {helpLink}
-                    {reportLink}
+                    {isAdmin ? helpLink : '' /* by Jerry 0016 */}
+                    {isAdmin ? reportLink : '' /* by Jerry 0016 */}
                     <li>
                         <a
                             href='#'

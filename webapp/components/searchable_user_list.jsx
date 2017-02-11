@@ -73,10 +73,23 @@ export default class SearchableUserList extends React.Component {
         let usersToDisplay;
         let count;
 
-        if (this.props.users == null) {
-            usersToDisplay = this.props.users;
-        } else if (this.state.search || this.props.users == null) {
-            usersToDisplay = this.props.users;
+		//	by Jerry 0010
+		//	모든 this.props.uses를 newUsers로 치환
+		var newUsers = null;
+		if(this.props.users != null) {
+			newUsers = [];
+			for(var idx in this.props.users) {
+				var user = this.props.users[idx];
+				if(user.username != 'mmadmin' && user.username != 'mmteam' && user.username != 'mmtest') {
+					newUsers.push(user);
+				}
+			}
+		}
+		
+        if (newUsers == null) {
+            usersToDisplay = newUsers;
+        } else if (this.state.search || newUsers == null) {
+            usersToDisplay = newUsers;
 
             if (this.props.total) {
                 count = (
@@ -93,7 +106,7 @@ export default class SearchableUserList extends React.Component {
         } else {
             const pageStart = this.state.page * this.props.usersPerPage;
             const pageEnd = pageStart + this.props.usersPerPage;
-            usersToDisplay = this.props.users.slice(pageStart, pageEnd);
+            usersToDisplay = newUsers.slice(pageStart, pageEnd);
 
             if (usersToDisplay.length >= this.props.usersPerPage) {
                 nextButton = (

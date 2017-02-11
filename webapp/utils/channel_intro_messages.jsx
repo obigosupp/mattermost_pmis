@@ -139,8 +139,8 @@ export function createDefaultIntroMessage(channel, centeredIntro) {
                     display_name: channel.display_name
                 }}
             />
-            {inviteModalLink}
-            {createSetHeaderButton(channel)}
+            {isAdmin ? inviteModalLink : '' /* by Jerry 0018 */}
+            {isAdmin ? createSetHeaderButton(channel) : '' /* by Jerry 0018 */}
             <br/>
         </div>
     );
@@ -235,6 +235,9 @@ export function createStandardIntroMessage(channel, centeredIntro) {
         );
     }
 
+    //	by Jerry 0018
+	const isAdmin = TeamStore.isTeamAdminForCurrentTeam() || UserStore.isSystemAdminForCurrentUser();
+	
     return (
         <div className={'channel-intro ' + centeredIntro}>
             <h4 className='channel-intro__title'>
@@ -252,8 +255,8 @@ export function createStandardIntroMessage(channel, centeredIntro) {
                 {purposeMessage}
                 <br/>
             </p>
-            {createInviteChannelMemberButton(channel, uiType)}
-            {createSetHeaderButton(channel)}
+            {isAdmin ? createInviteChannelMemberButton(channel, uiType) : '' /* by Jerry 0018 */}
+            {isAdmin ? createSetHeaderButton(channel) : '' /* by Jerry 0018 */}
         </div>
     );
 }
