@@ -43,9 +43,9 @@ export default class TeamButton extends React.Component {
         if (!content) {
             content = (
                 <div className='team-btn__initials'>
-                    {this.props.displayName.substring(0, 6)		/* by Jerry 0023 */}
+                    {this.props.displayName.substring(0, 5)		/* by Jerry 0023 */}
                     <div className='team-btn__content'>
-                        {this.props.displayName.substring(6)	/* by Jerry 0023 */}
+                        {this.props.displayName.substring(5)	/* by Jerry 0023 */}
                     </div>
                 </div>
             );

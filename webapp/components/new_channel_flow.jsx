@@ -118,10 +118,10 @@ class NewChannelFlow extends React.Component {
 					data.channel.id,
 					'hwa9shqf1bf58j3ayirxrjrq7e',
 					() => {
-						alert('success');
+						// alert('success');
 					},
 					(err) => {
-						alert('fail');
+						// alert('fail');
 					}
 				);
 				

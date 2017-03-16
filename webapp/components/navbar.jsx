@@ -487,7 +487,7 @@ export default class Navbar extends React.Component {
                 </li>
             );
 
-			var visible = (isAdmin || channel.name.indexOf("comm") != 0);		/* by Jerry 0021 0033 */
+			var visible = ((channel.type == 'P') && (isAdmin || channel.name.indexOf("comm") != 0));		/* by Jerry 0021 0033 */
 			
             return (
                 <div className='navbar-brand'>

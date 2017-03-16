@@ -345,7 +345,7 @@
   },
   {
     "id": "api.channel.remove_member.removed",
-    "translation": "%v 가 채널에서 제거되었습니다."
+    "translation": "%v 이(가) 채널에서 제거되었습니다."
   },
   {
     "id": "api.channel.remove_member.unable.app_error",

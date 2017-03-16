@@ -201,17 +201,34 @@ export default class ProfilePopover extends React.Component {
 
         if (this.props.user.position) {
             const position = this.props.user.position.substring(0, Constants.MAX_POSITION_LENGTH);
+			var tel1 = position.substring(0, position.indexOf('/'));
+			var tel2 = position.substring(position.indexOf('/') + 1);
             dataContent.push(
                 <div
                     data-toggle='tooltip'
-                    title={position}
-                    key='user-popover-position'
+                    title={tel1}
+                    key='user-popover-tel1'
                 >
-                    <p
+                    <a
+						href={'tel:' + tel1}
                         className='text-nowrap'
                     >
-                        {position}
-                    </p>
+                        {tel1}
+                    </a>
+                </div>
+            );
+            dataContent.push(
+                <div
+                    data-toggle='tooltip'
+                    title={tel2}
+                    key='user-popover-tel2'
+                >
+                    <a
+						href={'tel:' + tel2}
+                        className='text-nowrap'
+                    >
+                        {tel2}
+                    </a>
                 </div>
             );
         }
@@ -257,7 +274,7 @@ export default class ProfilePopover extends React.Component {
                 </div>
             );
         }
-
+		
         return (
             <Popover
                 {...popoverProps}

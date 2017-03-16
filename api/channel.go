@@ -369,7 +369,8 @@ func PostUpdateChannelDisplayNameMessage(c *Context, channelId string, oldChanne
 	} else {
 		user := uresult.Data.(*model.User)
 
-		message := fmt.Sprintf(utils.T("api.channel.post_update_channel_displayname_message_and_forget.updated_from"), user.Username, oldChannelDisplayName, newChannelDisplayName)
+		// by Jerry 0054
+		message := fmt.Sprintf(utils.T("api.channel.post_update_channel_displayname_message_and_forget.updated_from"), user.GetFullName(), oldChannelDisplayName, newChannelDisplayName)
 
 		post := &model.Post{
 			ChannelId: channelId,
@@ -573,7 +574,8 @@ func joinChannel(c *Context, channelChannel store.StoreChannel, userChannel stor
 			if _, err := AddUserToChannel(user, channel); err != nil {
 				return err, nil
 			}
-			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.Username), model.POST_JOIN_LEAVE)
+			// by Jerry 0054
+			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.GetFullName()), model.POST_JOIN_LEAVE)
 		} else {
 			return model.NewLocAppError("join", "api.channel.join_channel.permissions.app_error", nil, ""), nil
 		}
@@ -670,7 +672,8 @@ func JoinDefaultChannels(teamId string, user *model.User, channelRole string) *m
 
 		post := &model.Post{
 			ChannelId: result.Data.(*model.Channel).Id,
-			Message:   fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.Username),
+			// by Jerry 0054
+			Message:   fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.GetFullName()),
 			Type:      model.POST_JOIN_LEAVE,
 			UserId:    user.Id,
 		}
@@ -694,7 +697,8 @@ func JoinDefaultChannels(teamId string, user *model.User, channelRole string) *m
 
 		post := &model.Post{
 			ChannelId: result.Data.(*model.Channel).Id,
-			Message:   fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.Username),
+			// by Jerry 0054
+			Message:   fmt.Sprintf(utils.T("api.channel.join_channel.post_and_forget"), user.GetFullName()),
 			Type:      model.POST_JOIN_LEAVE,
 			UserId:    user.Id,
 		}
@@ -757,7 +761,8 @@ func leave(c *Context, w http.ResponseWriter, r *http.Request) {
 
 		RemoveUserFromChannel(c.Session.UserId, c.Session.UserId, channel)
 
-		go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.leave.left"), user.Username), model.POST_JOIN_LEAVE)
+		// by Jerry 0054
+		go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.leave.left"), user.GetFullName()), model.POST_JOIN_LEAVE)
 
 		result := make(map[string]string)
 		result["id"] = channel.Id
@@ -828,7 +833,8 @@ func deleteChannel(c *Context, w http.ResponseWriter, r *http.Request) {
 
 		post := &model.Post{
 			ChannelId: channel.Id,
-			Message:   fmt.Sprintf(c.T("api.channel.delete_channel.archived"), user.Username),
+			// by Jerry 0054
+			Message:   fmt.Sprintf(c.T("api.channel.delete_channel.archived"), user.GetFullName()),
 			Type:      model.POST_CHANNEL_DELETED,
 			UserId:    c.Session.UserId,
 		}
@@ -1059,7 +1065,8 @@ func addMember(c *Context, w http.ResponseWriter, r *http.Request) {
 
 			c.LogAudit("name=" + channel.Name + " user_id=" + userId)
 
-			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.add_member.added"), nUser.Username, oUser.Username), model.POST_ADD_REMOVE)
+			// by Jerry 0054
+			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.add_member.added"), nUser.GetFullName(), oUser.GetFullName()), model.POST_ADD_REMOVE)
 
 			<-Srv.Store.Channel().UpdateLastViewedAt([]string{id}, oUser.Id)
 			w.Write([]byte(cm.ToJson()))
@@ -1113,7 +1120,8 @@ func removeMember(c *Context, w http.ResponseWriter, r *http.Request) {
 
 			c.LogAudit("name=" + channel.Name + " user_id=" + userIdToRemove)
 
-			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.remove_member.removed"), oUser.Username), model.POST_ADD_REMOVE)
+			// by Jerry 0054
+			go PostUserAddRemoveMessage(c, channel.Id, fmt.Sprintf(utils.T("api.channel.remove_member.removed"), oUser.GetFullName()), model.POST_ADD_REMOVE)
 
 			result := make(map[string]string)
 			result["channel_id"] = channel.Id

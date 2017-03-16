@@ -499,6 +499,27 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 		c.LogAuditWithUserId(user.Id, "attempt")
 	}
 
+	// by Jerry 46
+        if !strings.HasPrefix(password, "{P}") {
+		url := fmt.Sprintf("http://pmis-koramco/login/certifyMSN?LOGIN_ID=%s&PWD=%s", loginId, password)
+		fmt.Println(url)
+		resp, err := http.Get(url)
+		if err != nil {
+			fmt.Printf("%s", err)
+		}
+	
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+		result := string(body)
+		if result != "Y" {
+			c.LogAuditWithUserId(user.Id, "failure")
+			return
+		}
+		
+        } else {
+                password = password[3:]
+	//////////////////////////////////////////////
+
 	// and then authenticate them
 	if user, err = authenticateUser(user, password, mfaToken); err != nil {
 		c.LogAuditWithUserId(user.Id, "failure")
@@ -508,6 +529,10 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+
+	// by Jerry 46
+	}
+	//////////////////////////////////////////////
 
 	c.LogAuditWithUserId(user.Id, "success")
 	if einterfaces.GetMetricsInterface() != nil {

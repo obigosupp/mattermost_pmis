@@ -399,6 +399,7 @@ export default class LoginController extends React.Component {
         }
 
         if (global.window.mm_config.EnableOpenServer === 'true' && this.checkSignUpEnabled()) {
+			if(false)		/* by Jerry 0027 */
             loginControls.push(
                 <div
                     className='form-group'

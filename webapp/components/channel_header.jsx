@@ -425,8 +425,10 @@ export default class ChannelHeader extends React.Component {
                 />
             );
 
+			var visible = ((channel.type == 'P') && (isAdmin || channel.name.indexOf("comm") != 0));		/* by Jerry 0017 0033 */	
+			
             if (!ChannelStore.isDefault(channel)) {
-				if(isAdmin || channel.name.indexOf("comm") != 0) dropdownContents.push(		/* by Jerry 0017 0033 */
+				if(visible) dropdownContents.push(		/* by Jerry 0017 0033 */
                     <li
                         key='add_members'
                         role='presentation'
@@ -445,7 +447,7 @@ export default class ChannelHeader extends React.Component {
                     </li>
                 );
 
-				if(isAdmin || channel.name.indexOf("comm") != 0) dropdownContents.push(		/* by Jerry 0017 0033 */
+				if(visible) dropdownContents.push(		/* by Jerry 0017 0033 */
                     <li
                         key='manage_members'
                         role='presentation'
@@ -492,7 +494,7 @@ export default class ChannelHeader extends React.Component {
                 </li>
             );
 
-			if(isAdmin || channel.name.indexOf("comm") != 0)		/* by Jerry 0017 0033 */
+			if(visible)		/* by Jerry 0017 0033 */
             if (ChannelUtils.showManagementOptions(channel, isAdmin, isSystemAdmin)) {
                 dropdownContents.push(
                     <li
@@ -558,7 +560,7 @@ export default class ChannelHeader extends React.Component {
                 );
             }
 
-			if(isAdmin || channel.name.indexOf("comm") != 0)		/* by Jerry 0017 0033 */
+			if(visible)		/* by Jerry 0017 0033 */
             if (ChannelUtils.showDeleteOption(channel, isAdmin, isSystemAdmin)) {
                 if (!ChannelStore.isDefault(channel)) {
                     dropdownContents.push(deleteOption);
@@ -567,7 +569,7 @@ export default class ChannelHeader extends React.Component {
                 dropdownContents.push(deleteOption);
             }
 
-			if(isAdmin)		/* by Jerry 0017 */
+			if(visible)		/* by Jerry 0017 */
             dropdownContents.push(
                 <li
                     key='divider-3'

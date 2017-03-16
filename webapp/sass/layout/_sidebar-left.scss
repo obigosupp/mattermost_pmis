@@ -150,8 +150,10 @@
                     }
                 }
 
+					/*	by Jerry 0041 */
                 &.unread-title {
-                    font-weight: 600;
+					color: #ffff00;
+                    font-weight: 900;
                 }
 
             }
@@ -177,8 +179,10 @@
                     font-weight: 400;
                     position: relative;
 
+					/*	by Jerry 0041 */
                     &.unread-title {
-                        font-weight: 600;
+						color: #ffff00;
+                        font-weight: 900;
                     }
                 }
             }

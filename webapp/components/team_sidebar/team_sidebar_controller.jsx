@@ -54,16 +54,18 @@ export default class TeamSidebar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!this.state.isMobile) {
+		/* by Jerry 0049 */
+//        if (!this.state.isMobile) {
             $('.team-wrapper').perfectScrollbar();
-        }
+//        }
 
         // reset the scrollbar upon switching teams
         if (this.state.currentTeam !== prevState.currentTeam) {
             this.refs.container.scrollTop = 0;
-            if (!this.state.isMobile) {
+		/* by Jerry 0049 */
+//            if (this.state.isMobile) {
                 $('.team-wrapper').perfectScrollbar('update');
-            }
+//            }
         }
     }
 
@@ -113,7 +115,10 @@ export default class TeamSidebar extends React.Component {
 		//	by Jerry 0024
 		//	코람코 Team을 가장 위에 표시
 		const newMyTeam = [];
-		const sortedMyTeam = myTeams.sort((a, b) => a.display_name.localeCompare(b.display_name));
+		//	by Jerry 0050
+		//	Team을 정해준 순서에 따라 정렬
+		const sortedMyTeam = myTeams.sort((a, b) => a.description.localeCompare(b.description));
+//		const sortedMyTeam = myTeams.sort((a, b) => a.display_name.localeCompare(b.display_name));
 		for(var idx in sortedMyTeam) {
 			var team = sortedMyTeam[idx];
 			if(team.name == 'koramco') {
@@ -122,7 +127,9 @@ export default class TeamSidebar extends React.Component {
 		}
 		for(var idx in sortedMyTeam) {
 			var team = sortedMyTeam[idx];
-			if(team.name != 'koramco') {
+			//	by Jerry 0051
+			//	삭제로 표시된 팀을 표시하지 않음
+			if(team.name != 'koramco' && team.name.indexOf("dbizz") != 0) {
 				newMyTeam.push(team)
 			}
 		}

@@ -11,6 +11,7 @@
             background-color: rgba(0, 0, 0, 0.2);
             height: 100%;
             overflow: auto;
+			overflow-y: scroll;		/* by Jerry 0049 */
             padding-top: 15px;
 
             .team-container {
@@ -67,7 +68,7 @@
                 /*	by Jerry 0024 */
 				&.koramco {
                     .team-btn {
-                        background-color: $red;
+                        background-color: #0c6b30;
                     }
                 }
 				
@@ -88,15 +89,18 @@
                     width: 5px;
                 }
 
+				/*	by Jerry 0040 */
                 &.unread:before {
+                    border: 5px solid alpha-color($red, 1);
                     background: $black;
                     border-radius: 50%;
+                    font-size: 10px;
                     content: '';
-                    height: 5px;
+                    height: 12px;
                     left: 0;
                     position: absolute;
-                    top: 18px;
-                    width: 5px;
+                    top: -6px;
+                    width: 12px;
                 }
 
                 a.team-disabled {
